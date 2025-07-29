@@ -7,7 +7,7 @@ var screen_size
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	screen_size = get_viewport_rect().size
-	#hide()
+	hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,5 +52,8 @@ func _on_body_entered(_body: Node2D) -> void:
 	
 func start(pos):
 	position = pos
+	$AnimatedSprite2D.flip_h = true
+	$AnimatedSprite2D.flip_v = false
+	$AnimatedSprite2D.animation = 'walk'
 	show()
 	$CollisionShape2D.disabled = false
