@@ -9,6 +9,8 @@ func _ready() -> void:
 	#new_game()
 
 func game_over() -> void:
+	$Music.stop()
+	$DeathSound.play()
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
@@ -20,6 +22,7 @@ func new_game():
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
+	$Music.play()
 	print("start game")
 	
 func _on_score_timer_timeout():
@@ -32,10 +35,8 @@ func _on_start_timer_timeout():
 	$ScoreTimer.start()
 
 func _on_mob_timer_timeout():
-	print("mob spawn start")
 #	创建一个新的怪物场景实例
 	var mob = mob_scene.instantiate() as RigidBody2D
-	print(mob.to_string())
 	# 在Path2D上选择一个随机路径
 	var mob_spawn_location = $MobPath/MobSpawnLocation
 	mob_spawn_location.progress_ratio = randf()
